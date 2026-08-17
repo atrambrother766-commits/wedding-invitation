@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="mr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>मराठी विवाह आमंत्रण</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="app">
+      <section class="screen welcome-screen" id="welcomeScreen">
+        <div class="welcome-backdrop" id="welcomeBackdrop"></div>
+        <div class="backdrop-shade"></div>
+        <button class="photo-control" id="couplePhotoBtn" type="button">⌁ <span>आपला फोटो</span></button>
+        <input id="couplePhotoInput" type="file" accept="image/*" hidden />
+        <div class="welcome-content">
+          <p class="eyebrow" data-key="welcomeKicker">शुभ मंगल सावधान</p>
+          <button class="monogram" id="monogram" type="button" aria-label="Admin editable initials"></button>
+          <h1 data-key="welcomeTitle">आमच्या शुभविवाहाचे हार्दिक आमंत्रण</h1>
+          <p class="welcome-copy" data-key="welcomeCopy">तुमच्या उपस्थितीने आमचा आनंद द्विगुणित होईल.</p>
+          <form id="guestForm" class="guest-card">
+            <label for="guestName">आपले नाव लिहा</label>
+            <input id="guestName" autocomplete="name" placeholder="उदा. प्रिय मित्र" required />
+            <button type="submit">आमंत्रण उघडा <span>→</span></button>
+          </form>
+          <button class="admin-entry" id="showAdminLogin" type="button">आयोजक / Admin लॉगिन</button>
+          <div class="admin-home-panel hidden" id="adminHomePanel">
+            <span>✦ Admin edit mode</span>
+            <button id="editCeremonyBtn" type="button">दुसरे पान संपादित करा →</button>
+            <button id="whatsappSettingsBtn" type="button">📲 WhatsApp नंबर सेट करा</button>
+            <small id="whatsappAdminStatus"></small>
+            <button id="homeLogoutBtn" type="button">लॉगआउट</button>
+          </div>
+        </div>
+        <p class="scroll-hint">प्रेमाने आमंत्रित</p>
+      </section>
+
+      <section class="screen admin-screen hidden" id="adminScreen">
+        <button class="back-button dark-back" id="adminBackBtn" type="button" aria-label="मागे जा">←</button>
+        <div class="admin-login-card">
+          <div class="admin-seal">✦</div>
+          <p class="section-kicker">आयोजक प्रवेश</p>
+          <h1>Admin लॉगिन</h1>
+          <p>लग्नाची माहिती बदलण्यासाठी लॉगिन करा.</p>
+          <form id="adminForm">
+            <label for="adminPassword">पासवर्ड</label>
+            <input id="adminPassword" type="password" placeholder="पासवर्ड टाका" required />
+            <p class="login-error hidden" id="loginError">पासवर्ड चुकीचा आहे.</p>
+            <button type="submit">Admin म्हणून पुढे जा →</button>
+          </form>
+          <small>Admin password सुरक्षित ठेवा.</small>
+        </div>
+      </section>
+
+      <section class="screen invitation-screen hidden" id="invitationScreen">
+        <header class="hero" id="hero">
+          <div class="hero-image" id="heroImage"></div>
+          <div class="hero-fade"></div>
+          <button class="back-button" id="backBtn" type="button" aria-label="मागे जा">←</button>
+          <button class="admin-logout hidden" id="adminLogout" type="button">लॉगआउट</button>
+          <button class="photo-control hero-photo-control" id="backgroundBtn" type="button">⌁ पार्श्वभूमी</button>
+          <input id="backgroundInput" type="file" accept="image/*" hidden />
+          <div class="hero-content">
+            <p class="eyebrow">श्री गणेशाय नमः</p>
+            <div class="ganesha">ॐ</div>
+            <p class="invite-line"><span id="guestGreeting">प्रिय पाहुणे</span>, आपले सहर्ष स्वागत आहे</p>
+            <h2><span data-key="groom">आकाश</span><i>✦</i><span data-key="bride">वैष्णवी</span></h2>
+            <p class="marriage-label">यांचा शुभविवाह</p>
+          </div>
+        </header>
+
+        <section class="details-area">
+          <div class="intro-row">
+            <div>
+              <p class="section-kicker">आपल्यासाठी</p>
+              <h3>सोहळ्याची माहिती</h3>
+            </div>
+            <button class="edit-toggle" id="editToggle" type="button">संपादित करा</button>
+          </div>
+          <div class="quick-actions"><button class="action-button hidden" id="guestMapBtn" type="button">📍 विवाह स्थळ Google Maps वर पहा</button><button class="action-button hidden" id="whatsappGuestBtn" type="button">📲 WhatsApp वर आमंत्रण Share करा</button></div>
+          <button class="note-card folder-card" data-folder="note" type="button">
+            <span class="folder-icon note-icon">✦</span>
+            <span><b>टीप</b><small id="notePreview">आपल्या प्रेमळ उपस्थितीची अपेक्षा आहे.</small></span>
+            <span class="chevron">›</span>
+          </button>
+          <div class="folder-grid" id="folderGrid"></div>
+          <div class="admin-only-tools hidden" id="adminOnlyTools"><button class="action-button" id="mapSettingsBtn" type="button">📍 विवाह स्थळाचा Google Maps Pin सेट करा</button><p id="adminMapStatusInline"></p></div>
+        </section>
+      </section>
+
+      <section class="modal hidden" id="detailModal" aria-modal="true" role="dialog">
+        <div class="modal-scrim" data-close></div>
+        <article class="modal-card">
+          <button class="modal-close" data-close type="button">×</button>
+          <div class="modal-symbol" id="modalSymbol"></div>
+          <p class="section-kicker" id="modalKicker">विवाह सोहळा</p>
+          <h2 id="modalTitle"></h2>
+          <div id="modalFields" class="modal-fields"></div>
+          <button class="add-detail" id="addDetail" type="button">＋ आणखी माहिती जोडा</button>
+          <button class="save-button" id="saveDetail" type="button">बदल जतन करा</button>
+        </article>
+      </section>
+    </main>
+
+    <section class="modal hidden" id="monogramModal" aria-modal="true" role="dialog">
+      <div class="modal-scrim" data-close></div>
+      <article class="modal-card">
+        <button class="modal-close" id="closeMonogram" type="button">×</button>
+        <div class="modal-symbol">✦</div>
+        <p class="section-kicker">फक्त Admin</p>
+        <h2>पहिल्या पानाचे अक्षर डिझाइन</h2>
+        <p class="modal-help">Guest हे अक्षर बदलू शकणार नाही. फक्त Admin login केल्यानंतरच हा design बदलता येईल.</p>
+        <div id="monogramModalFields" class="modal-fields"></div>
+        <button class="save-button" id="saveMonogram" type="button">अक्षर डिझाइन जतन करा</button>
+      </article>
+    </section>
+
+    <section class="modal hidden" id="mapSettingsModal" aria-modal="true" role="dialog">
+      <div class="modal-scrim" data-close></div>
+      <article class="modal-card">
+        <button class="modal-close" id="closeMapSettings" type="button">×</button>
+        <div class="modal-symbol">📍</div>
+        <p class="section-kicker">फक्त Admin</p>
+        <h2>विवाह स्थळाचा Pin सेट करा</h2>
+        <p class="modal-help">Google Maps मध्ये विवाहस्थळ उघडा → Share → Copy link करा आणि खाली paste करा. Guest ला हाच pin दिसेल.</p>
+        <div class="modal-fields">
+          <div class="field"><label for="venueMapUrlInput">Google Maps location link</label><input id="venueMapUrlInput" placeholder="https://maps.google.com/..." /></div>
+        </div>
+        <p class="map-status" id="adminMapStatus"></p>
+        <button class="save-button" id="saveMapSettings" type="button">Pin जतन करा</button>
+      </article>
+    </section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
